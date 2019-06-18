@@ -1,26 +1,26 @@
+// Dependencies
 import React from 'react';
-import logo from 'img/logo.svg';
-import './App.css';
+import styled from 'styled-components/macro';
 
-function App() {
+import ShadesCollection from 'components/ShadesCollection/ShadesCollection';
+
+const CenterCenter = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+`;
+
+export default function App(props) {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/components/App/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CenterCenter>
+      <ShadesCollection/>
+      <ShadesCollection/>
+      <ShadesCollection/>
+      <ShadesCollection/>
+      <ShadesCollection/>
+    </CenterCenter>
   );
-}
-
-export default App;
+};
