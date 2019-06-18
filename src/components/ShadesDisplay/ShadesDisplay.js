@@ -2,13 +2,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-// Components
-// import ColBox from 'src/components/Box/ColBox';
-// import RowBox from 'src/components/Box/RowBox';
-
-// Local
-//import styles from './ShadesDisplay.module.scss';
-
 const Swatch = styled.div.attrs(props => ({
   style: { backgroundColor: props.children }
 }))`
@@ -84,9 +77,7 @@ function hslToRgbString(h, s, l) {
 
 function isDark(color) {
     let r, g, b, hsp;
-    console.log("color 1",color);
     color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
-    console.log("color 2",color);
     r = color[1];
     g = color[2];
     b = color[3];
