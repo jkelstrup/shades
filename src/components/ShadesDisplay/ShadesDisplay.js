@@ -46,33 +46,35 @@ const Row = styled.div`
   width: 200px;
 `;
 
-function hslToRgb(h, s, l){
-    h = h/360;
-    s = s/100;
-    l = l/100;
+function hslToRgb(h, s, l) {
 
-    var r, g, b;
+  h = h/360;
+  s = s/100;
+  l = l/100;
 
-    if(s === 0){
-        r = g = b = l; // achromatic
-    }else{
-      var hue2rgb = function hue2rgb(p, q, t){
-        if(t < 0) t += 1;
-        if(t > 1) t -= 1;
-        if(t < 1/6) return p + (q - p) * 6 * t;
-        if(t < 1/2) return q;
-        if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-        return p;
-      }
+  var r, g, b;
 
-      var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-      var p = 2 * l - q;
-      r = hue2rgb(p, q, h + 1/3);
-      g = hue2rgb(p, q, h);
-      b = hue2rgb(p, q, h - 1/3);
+  if (s === 0) {
+    r = g = b = l; // achromatic
+  } else {
+    function hue2rgb(p, q, t) {
+      if (t < 0) t += 1;
+      if (t > 1) t -= 1;
+      if (t < 1/6) return p + (q - p) * 6 * t;
+      if (t < 1/2) return q;
+      if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+      return p;
     }
 
-    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    var p = 2 * l - q;
+
+    r = Math.min(Math.max(hue2rgb(p, q, h + 1/3), 0), 255);
+    g = Math.min(Math.max(hue2rgb(p, q, h), 0), 255);
+    b = Math.min(Math.max(hue2rgb(p, q, h - 1/3), 0), 255);
+  }
+
+  return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 }
 
 function hslToRgbString(h, s, l) {
@@ -82,7 +84,9 @@ function hslToRgbString(h, s, l) {
 
 function isDark(color) {
     let r, g, b, hsp;
+    console.log("color 1",color);
     color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
+    console.log("color 2",color);
     r = color[1];
     g = color[2];
     b = color[3];
