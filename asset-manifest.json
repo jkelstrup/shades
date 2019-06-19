@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/shades/static/css/main.9af39f49.chunk.css",
-    "main.js": "/shades/static/js/main.8d26f2e8.chunk.js",
+    "main.js": "/shades/static/js/main.e2d25de9.chunk.js",
     "runtime~main.js": "/shades/static/js/runtime~main.16b7fa52.js",
     "static/js/2.264b3348.chunk.js": "/shades/static/js/2.264b3348.chunk.js",
     "index.html": "/shades/index.html",
-    "precache-manifest.cd3bb3eb6b5ebefe2d97e35e1a6e254a.js": "/shades/precache-manifest.cd3bb3eb6b5ebefe2d97e35e1a6e254a.js",
+    "precache-manifest.8141d72cb903b587249484f5d4466716.js": "/shades/precache-manifest.8141d72cb903b587249484f5d4466716.js",
     "service-worker.js": "/shades/service-worker.js"
   }
 }
