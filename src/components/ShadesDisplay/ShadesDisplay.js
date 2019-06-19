@@ -2,6 +2,8 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
+import hsl2rgb from 'tools/hsl2rgb';
+
 const Swatch = styled.div.attrs(props => ({
   style: { backgroundColor: props.children }
 }))`
@@ -71,7 +73,7 @@ function hslToRgb(h, s, l) {
 }
 
 function hslToRgbString(h, s, l) {
-  let [r,g,b] = hslToRgb(h,s,l);
+  let [r,g,b] = hsl2rgb(h,s,l);
   return `rgb(${r},${g},${b})`;
 }
 
@@ -94,27 +96,27 @@ function generateShades({h,s,l}) {
   let minL = 9;
 
   return {
-    //                          |- - - H - -| |- - - - S - - - - | |- - - L - - - - |
-    lightest:    hslToRgbString( (h+8) % 360,  Math.max(s,     0),  (l + ((maxL-l) / 3 ) * 3) * 1.00),
-    lightestAlt: hslToRgbString( (h+8) % 360,  Math.max(s+8,   0),  (l + ((maxL-l) / 3 ) * 3) * 0.96),
-    //                          |- - - H - -| |- - - - S - - - - | |- - - L - - - - |
-    lighter:     hslToRgbString( (h+5) % 360,  Math.max(s,     0),  (l + ((maxL-l) / 3 ) * 2) * 1.00),
-    lighterAlt:  hslToRgbString( (h+5) % 360,  Math.max(s+5,   0),  (l + ((maxL-l) / 3 ) * 2) * 0.96),
-    //                          |- - - H - -| |- - - - S - - - - | |- - - L - - - - |
-    light:       hslToRgbString( (h+3) % 360,  Math.max(s,     0),  (l + ((maxL-l) / 3 ) * 1) * 1.00),
-    lightAlt:    hslToRgbString( (h+3) % 360,  Math.max(s+3,   0),  (l + ((maxL-l) / 3 ) * 1) * 0.96),
+    //                           |- - - - HUE - - - - |   |- - SATURATION - -|   |- - - - -  LIGHTNESS  - - - - - |
+    lightest:    hslToRgbString(  (360+( h + 8 ))%360,     Math.min(s,   100),    (l + ((maxL-l) / 3 ) * 3) * 1.00  ),
+    lightestAlt: hslToRgbString(  (360+( h + 8 ))%360,     Math.min(s+8, 100),    (l + ((maxL-l) / 3 ) * 3) * 0.96  ),
+    //                           |- - - - HUE - - - - |   |- - SATURATION - -|   |- - - - -  LIGHTNESS  - - - - - |
+    lighter:     hslToRgbString(  (360+( h + 5 ))%360,     Math.min(s,   100),    (l + ((maxL-l) / 3 ) * 2) * 1.00  ),
+    lighterAlt:  hslToRgbString(  (360+( h + 5 ))%360,     Math.min(s+5, 100),    (l + ((maxL-l) / 3 ) * 2) * 0.96  ),
+    //                           |- - - - HUE - - - - |   |- - SATURATION - -|   |- - - - -  LIGHTNESS  - - - - - |
+    light:       hslToRgbString(  (360+( h + 3 ))%360,     Math.min(s,   100),    (l + ((maxL-l) / 3 ) * 1) * 1.00  ),
+    lightAlt:    hslToRgbString(  (360+( h + 3 ))%360,     Math.min(s+3, 100),    (l + ((maxL-l) / 3 ) * 1) * 0.96  ),
 
     base:        hslToRgbString(h,s,l), // NO CHANGE!
 
-    //                          |- - - H - -| |- - - - S - - - - | |- - - L - - - - |
-    dark:        hslToRgbString( (h-3) % 360,  Math.min(s,   100),  l-(l-minL)/3),
-    darkAlt:     hslToRgbString( (h-3) % 360,  Math.min(s+3, 100),  l-(l-minL)/3*1.1),
-    //                          |- - - H - -| |- - - - S - - - - | |- - - L - - - - |
-    darker:      hslToRgbString( (h-5) % 360,  Math.min(s,   100),  l-(l-minL)/3*2),
-    darkerAlt:   hslToRgbString( (h-5) % 360,  Math.min(s+5, 100),  l-(l-minL)/3*2*1.1),
-    //                          |- - - H - -| |- - - - S - - - - | |- - - L - - - - |
-    darkest:     hslToRgbString( (h-8) % 360,  Math.min(s,   100),  minL),
-    darkestAlt:  hslToRgbString( (h-8) % 360,  Math.min(s+8, 100),  minL*1.1),
+    //                           |- - - - HUE - - - - |   |- - SATURATION - -|   |- - - - -  LIGHTNESS  - - - - - |
+    dark:        hslToRgbString(  (360+( h - 3 ))%360,     Math.min(s,   100),    (l - ((l-minL) / 3 ) * 1) * 1.00  ),
+    darkAlt:     hslToRgbString(  (360+( h - 3 ))%360,     Math.min(s+3, 100),    (l - ((l-minL) / 3 ) * 1) * 1.10  ),
+    //                           |- - - - HUE - - - - |   |- - SATURATION - -|   |- - - - -  LIGHTNESS  - - - - - |
+    darker:      hslToRgbString(  (360+( h - 5 ))%360,     Math.min(s,   100),    (l - ((l-minL) / 3 ) * 2) * 1.00  ),
+    darkerAlt:   hslToRgbString(  (360+( h - 5 ))%360,     Math.min(s+5, 100),    (l - ((l-minL) / 3 ) * 2) * 1.10  ),
+    //                           |- - - - HUE - - - - |   |- - SATURATION - -|   |- - - - -  LIGHTNESS  - - - - - |
+    darkest:     hslToRgbString(  (360+( h - 8 ))%360,     Math.min(s,   100),    (l - ((l-minL) / 3 ) * 3) * 1.00  ),
+    darkestAlt:  hslToRgbString(  (360+( h - 8 ))%360,     Math.min(s+8, 100),    (l - ((l-minL) / 3 ) * 3) * 1.10  ),
   }
 }
 

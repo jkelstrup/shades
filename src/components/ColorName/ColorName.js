@@ -11,58 +11,77 @@ import React from 'react';
 export default function ColorName(props) {
 
   function colorName(h,s,l) {
+    if (s === 0) {
+      return "Gray";
+    }
+
     let colorName = "Unknown color";
     let hueIndex = Math.floor((h + 15) % 360 / 30);
 
-    if (s > 25) {
+    switch (hueIndex) {
+      case 0:
+        colorName = "Red";
+        break;
+      case 1:
+        colorName = "Orange";
+        break;
+      case 2:
+        colorName = "Yellow";
+        break;
+      case 3:
+        colorName = "Lime";
+        break;
+      case 4:
+        colorName = "Green";
+        break;
+      case 5:
+        colorName = "Turquoise";
+        break;
+      case 6:
+        colorName = "Cyan";
+        break;
+      case 7:
+        colorName = "Azure";
+        break;
+      case 8:
+        colorName = "Blue";
+        break;
+      case 9:
+        colorName = "Purple";
+        break;
+      case 10:
+        colorName = "Violet";
+        break;
+      case 11:
+        colorName = "Pink";
+        break;
+      default:
+        colorName = "Weirdly unknown color";
+    }
+
+    if (s < 20) {
       switch (hueIndex) {
         case 0:
-          colorName = "Red";
+          colorName = "Warmgray";
           break;
         case 1:
-          colorName = "Orange";
+          colorName = "Warmgray";
           break;
         case 2:
-          colorName = "Yellow";
-          break;
-        case 3:
-          colorName = "Lime";
-          break;
-        case 4:
-          colorName = "Green";
+          colorName = "Warmgray";
           break;
         case 5:
-          colorName = "Turquoise";
+          colorName = "Coolgray";
           break;
         case 6:
-          colorName = "Cyan";
+          colorName = "Coolgray";
           break;
         case 7:
-          colorName = "Azure";
-          break;
-        case 8:
-          colorName = "Blue";
-          break;
-        case 9:
-          colorName = "Purple";
-          break;
-        case 10:
-          colorName = "Violet";
-          break;
-        case 11:
-          colorName = "Pink";
+          colorName = "Coolgray";
           break;
         default:
-          colorName = "Weirdly unknown color";
+          colorName += "gray";
       }
-    } else if (s > 0) {
-      if (hueIndex > 4 && hueIndex < 10) {
-        colorName = "Coolgray";
-      } else {
-        colorName = "Warmgray";
-      }
-    } else {
-      colorName = "Gray";
     }
 
 

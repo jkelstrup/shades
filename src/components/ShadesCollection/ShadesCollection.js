@@ -27,12 +27,12 @@ export default function ShadesCollection(props) {
       <ColorName h={ baseH } s={ baseS } l={ baseL }/>
       <ShadesDisplay baseHSL={{h: baseH, s: baseS, l: baseL}}/>
       <div style={{display: "flex", flexDirection: "column", marginBottom: "40px"}}>
-        <pre>H: {baseH} { baseS === 0 && "(No effect)"}</pre>
+        <pre title={ baseS === 0 && "Hue has no effect with 0 saturation" } style={{opacity: baseS === 0 && ".25"}}>H: {baseH}</pre>
         <input type="range" min={0} max={360} step={1} value={ baseH } onChange={ (event) => setBaseH(+event.target.value) }/>
         <pre>S: {baseS}</pre>
         <input type="range" min={0} max={100} step={1} value={ baseS } onChange={ (event) => setBaseS(+event.target.value) }/>
         <pre>L: {baseL}</pre>
-        <input type="range" min={9} max={96} step={1} value={ baseL } onChange={ (event) => setBaseL(+event.target.value) }/>
+        <input type="range" min={25} max={75} step={1} value={ baseL } onChange={ (event) => setBaseL(+event.target.value) }/>
       </div>
     </div>
   );
